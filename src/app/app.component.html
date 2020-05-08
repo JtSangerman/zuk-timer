@@ -6,26 +6,45 @@
     src="https://oldschool.runescape.wiki/images/5/58/TzKal-Zuk.png?1f4e1"
   />
   <span>Zuk Timer v1.0</span>
-    <div class="spacer"></div>
-    <a aria-label="Zuk Timer on GitHub" target="_blank" rel="noopener" href="https://github.com/JtSangerman/zuk-timer" title="GitHub">
-      <img
-        width="40"
-        alt="Zuk logo"
-        src="https://cdn.iconscout.com/icon/free/png-256/github-153-675523.png"
-      />
-    </a>
+  <div class="spacer"></div>
+  Source:
+  <a
+    aria-label="Zuk Timer on GitHub"
+    target="_blank"
+    rel="noopener"
+    href="https://github.com/JtSangerman/zuk-timer"
+    title="GitHub"
+  >
+    <img
+      width="40"
+      alt="Zuk logo"
+      src="https://cdn.iconscout.com/icon/free/png-256/github-153-675523.png"
+    />
+  </a>
 </div>
 
 <div class="content" role="main">
   <div class="timer">
-    {{timeRemaining | timeFormat}}
+    {{ timeRemaining | timeFormat }}
   </div>
-  <div class="buttons-row">
-    <button mat-raised-button (click)="moveToStage3()">Move to stage 3 (zuk below 600)</button>
-    <button mat-raised-button (click)="moveToStage3()">Move to stage 4 (zuk below 480, JAD SPAWNED!)</button>
-    <button mat-raised-button (click)="moveToStage3()">Move to stage 5 (healers spawned)</button>
+  <div class="buttons-container">
+    <div class="buttons-stack">
+      <button
+        *ngIf="stage === 0"
+        class="stage-button"
+        mat-raised-button
+        (click)="start()"
+      >
+        START (Click when Zuk animation over)
+      </button>
+      <button class="stage-button" mat-raised-button (click)="moveToStage3()">
+        Move to stage 3 (zuk below 600)
+      </button>
+      <button class="stage-button" mat-raised-button (click)="moveToStage4()">
+        Move to stage 4 (zuk below 480, JAD SPAWNED!)
+      </button>
+    </div>
   </div>
 </div>
-
 
 <router-outlet></router-outlet>

@@ -1,66 +1,87 @@
-import { Component, OnInit } from '@angular/core';
-import { timer } from 'rxjs';
+import { Component, OnInit } from "@angular/core";
+import { timer } from "rxjs";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
-  title = 'zuk-timer';
+  title = "zuk-timer";
 
-  timeRemaining: number = 5;
+  timeRemaining: number = 45;
   timer = timer(1000, 1000);
-  paused: boolean = false;
-  stage: number = 1;
+  paused: boolean = true;
+  stage: number = 0;
 
   ngOnInit() {
     this.timer.subscribe(time => {
-      console.log(`observable timer time: ${time}, timeRemaining: ${this.timeRemaining}`)
+      console.log(
+        `observable timer time: ${time}, timeRemaining: ${this.timeRemaining}`
+      );
 
-      if (this.paused) {
+      if (this.paused || this.stage === 0) {
         return;
       }
       this.timeRemaining--;
 
-      switch (this.timeRemaining){
-        case 15: this.warnFifteenSeconds(); break;
-        case 5: this.warnFiveSeconds(); break;
-        case 3: this.warn3_2_1(); break;
-        default: break;
+      switch (this.timeRemaining) {
+        case 15:
+          this.warnFifteenSeconds();
+          break;
+        case 5:
+          this.warnFiveSeconds();
+          break;
+        case 3:
+          this.warn3_2_1();
+          break;
+        default:
+          break;
       }
 
-      if (this.timeRemaining === 0 && this.stage === 1){
-        this.stage = 2;
+      if (this.timeRemaining === 0) {
+        if (this.stage === 1) this.stage = 2;
         this.timeRemaining = 210;
       }
-    })
+    });
   }
 
-  moveToStage3(){
+  // Zuk <= 600hp. Timer paused.
+  moveToStage3() {
     this.stage = 3;
     this.paused = true;
   }
 
-  moveToStage4(){
+  // Zuk <=480 hp. Jad spawns, add 1m:45s to timer. Resume timer.
+  moveToStage4() {
     this.stage = 4;
     this.paused = false;
     this.timeRemaining += 105;
   }
 
-  warnFifteenSeconds(){
-    //this.play("../assets/sounds/fifteen.wave")
+  start() {
+    this.paused = false;
+    this.stage = 1;
   }
 
-  warnFiveSeconds(){
-    //this.play("../assets/sounds/five.wav")
+  pause() {
+    this.paused = true;
   }
 
-  warn3_2_1(){
-    //this.play("../assets/sounds/3_2_1.wav")
+  warnFifteenSeconds() {
+    this.play("../assets/sounds/fifteen_left.m4a");
   }
 
-  private play(path: string){
+  warnFiveSeconds() {
+    this.play("../assets/sounds/five_left.m4a");
+  }
+
+  warn3_2_1() {
+    this.play("../assets/sounds/countdown3s.m4a");
+  }
+
+  private play(path: string) {
+    console.log("playing " + path);
     let audio = new Audio();
     audio.src = path;
     audio.load();
