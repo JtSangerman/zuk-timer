@@ -24,26 +24,100 @@
 </div>
 
 <div class="content" role="main">
+  <span class="info-txt">NEXT SET SPAWNING IN:</span>
   <div class="timer">
     {{ timeRemaining | timeFormat }}
   </div>
   <div class="buttons-container">
     <div class="buttons-stack">
       <button
-        *ngIf="stage === 0"
         class="stage-button"
         mat-raised-button
         (click)="start()"
+        [disabled]="stage !== 0"
       >
-        START (Click when Zuk animation over)
+        <div class="button-wrapper">
+          <span class="main-txt">
+            START
+          </span>
+          <span class="secondary-txt">
+            (Click when Zuk animation over)
+          </span>
+        </div>
       </button>
-      <button class="stage-button" mat-raised-button (click)="moveToStage3()">
-        Move to stage 3 (zuk below 600)
+      <button
+        class="stage-button"
+        mat-raised-button
+        (click)="moveToStage3()"
+        [disabled]="stage !== 2"
+      >
+        <div class="button-wrapper">
+          <span class="main-txt">
+            Move to stage 3
+          </span>
+          <span class="secondary-txt">
+            (Click as soon as Zuk &lt;= 600hp)
+          </span>
+        </div>
       </button>
-      <button class="stage-button" mat-raised-button (click)="moveToStage4()">
-        Move to stage 4 (zuk below 480, JAD SPAWNED!)
+      <button
+        class="stage-button"
+        mat-raised-button
+        (click)="moveToStage4()"
+        [disabled]="stage !== 3"
+      >
+        <div class="button-wrapper">
+          <span class="main-txt">
+            Move to stage 4
+          </span>
+          <span class="secondary-txt">
+            Click as soon as Jad spawns (Zuk &lt;= 480hp)
+          </span>
+        </div>
       </button>
     </div>
+  </div>
+  <div class="row progress-bar">
+    <span
+      class="segment"
+      [class.current]="stage === 0"
+      [class.past]="stage > 0"
+      [class.future]="false"
+    >
+      Stage 0
+    </span>
+    <span
+      class="segment"
+      [class.current]="stage === 1"
+      [class.past]="stage > 1"
+      [class.future]="stage < 1"
+    >
+      Stage 1
+    </span>
+    <span
+      class="segment"
+      [class.current]="stage === 2"
+      [class.past]="stage > 2"
+      [class.future]="stage < 2"
+    >
+      Stage 2
+    </span>
+    <span
+      class="segment"
+      [class.current]="stage === 3"
+      [class.past]="stage > 3"
+      [class.future]="stage < 3"
+    >
+      Stage 3
+    </span>
+    <span
+      class="segment"
+      [class.current]="stage === 4"
+      [class.past]="false"
+      [class.future]="stage < 4"
+    >
+      Stage 4
+    </span>
   </div>
 </div>
 
