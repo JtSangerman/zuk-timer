@@ -350,27 +350,48 @@ svg#clouds {
     justify-content: center;
     flex-direction: row;
 
-    .segment {
-      height: 25px;
-      width: 75px;
-
-      display: flex;
-      justify-content: center;
-
+    .segment-container {
+      width: 110px;
       margin-left: 3px;
       margin-right: 3px;
       padding-top: 3px;
 
-      &.current {
-        background: green;
+      .stage-desc {
+        display: flex;
+        text-align: center;
       }
 
-      &.past {
-        background: red;
-      }
+      .segment {
+        color: white;
+        height: 16px;
+        width: 110px;
 
-      &.future {
-        background: gray;
+        display: flex;
+        justify-content: center;
+
+        margin-left: 3px;
+        margin-right: 3px;
+
+        border-radius: 3px;
+        font-size: 12px;
+
+        &.current {
+          background: #125699;
+        }
+
+        &.past {
+          background: green;
+        }
+
+        &.future {
+          background: #e0e0e0;
+        }
+
+        .stage-num {
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+        }
       }
     }
   }

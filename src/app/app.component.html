@@ -5,7 +5,7 @@
     alt="Zuk logo"
     src="https://oldschool.runescape.wiki/images/5/58/TzKal-Zuk.png?1f4e1"
   />
-  <span>Zuk Timer v1.0</span>
+  <span>Zuk Timer v1.1</span>
   <div class="spacer"></div>
   Source:
   <a
@@ -78,46 +78,59 @@
     </div>
   </div>
   <div class="row progress-bar">
-    <span
-      class="segment"
-      [class.current]="stage === 0"
-      [class.past]="stage > 0"
-      [class.future]="false"
-    >
-      Stage 0
-    </span>
-    <span
-      class="segment"
-      [class.current]="stage === 1"
-      [class.past]="stage > 1"
-      [class.future]="stage < 1"
-    >
-      Stage 1
-    </span>
-    <span
-      class="segment"
-      [class.current]="stage === 2"
-      [class.past]="stage > 2"
-      [class.future]="stage < 2"
-    >
-      Stage 2
-    </span>
-    <span
-      class="segment"
-      [class.current]="stage === 3"
-      [class.past]="stage > 3"
-      [class.future]="stage < 3"
-    >
-      Stage 3
-    </span>
-    <span
-      class="segment"
-      [class.current]="stage === 4"
-      [class.past]="false"
-      [class.future]="stage < 4"
-    >
-      Stage 4
-    </span>
+    <div class="segment-container">
+      <span
+        class="segment"
+        [class.current]="stage === 1"
+        [class.past]="stage > 1"
+        [class.future]="stage < 1"
+      >
+        <span class="stage-num">1</span>
+      </span>
+      <span class="stage-desc">
+        Waiting 45s for first set.
+      </span>
+    </div>
+    <div class="segment-container">
+      <span
+        class="segment"
+        [class.current]="stage === 2"
+        [class.past]="stage > 2"
+        [class.future]="stage < 2"
+      >
+        <span class="stage-num">2</span>
+      </span>
+      <span class="stage-desc">
+        Set spawning every 3m30s.
+      </span>
+    </div>
+    <div class="segment-container">
+      <span
+        class="segment"
+        [class.current]="stage === 3"
+        [class.past]="stage > 3"
+        [class.future]="stage < 3"
+      >
+        <span class="stage-num">3</span>
+      </span>
+      <span class="stage-desc">
+        Zuk &lt;=600. Timer paused.
+      </span>
+    </div>
+    <div class="segment-container">
+      <span
+        class="segment"
+        [class.current]="stage === 4"
+        [class.past]="false"
+        [class.future]="stage < 4"
+      >
+        <span class="stage-num">4</span>
+      </span>
+      <span class="stage-desc">
+        Zuk &lt;=480. Jad spawned. Added 1m:45s. Set spawning every 3m:30s from
+        here.
+      </span>
+    </div>
   </div>
 </div>
 
